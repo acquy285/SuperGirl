@@ -1,9 +1,9 @@
-import java.net.*;
+﻿import java.net.*;
 import java.io.*;
  
 public class Server1
 {
-    public static void main(Stringơ] args) throws Exception
+    public static void main(String[] args) throws Exception
 	{
 		Server1 SERVER = new Server1();
 		SERVER.run();
