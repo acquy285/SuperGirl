@@ -1,3 +1,8 @@
+/*
+Source from: https://systembash.com/a-simple-java-tcp-server-and-tcp-client/
+*/
+
+
 import java.io.*;
 import java.net.*;
 
