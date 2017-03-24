@@ -1,0 +1,3 @@
+Socket s = new Socket(serverAddress, 9090);
+BufferedReader input = new BufferedReader(new InputStreamReader(s.getInputStream()));
+String answer = input.readLine();
