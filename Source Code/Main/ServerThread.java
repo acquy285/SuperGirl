@@ -1,6 +1,12 @@
+/*
+Source:
+*/
+
+//--------------------------------------------------------------------------------------------------
 import java.io.*;
 import java.net.*;
 
+//--------------------------------------------------------------------------------------------------
 public class ServerThread extends Thread
 {
         
@@ -9,21 +15,23 @@ public class ServerThread extends Thread
         {
 		this.socket = socket;
 	}
+	
+	//----------------------------------------------------------------------------------------------
 	public void run()
         {
 		try
                 {
 			String message = null;
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream())); // tao luong input
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream())); // Create input stream
 			while((message = bufferedReader.readLine()) != null )
                         {
-				System.out.println("Client: " + message);	// hien thi massage ma Client gui den
+				System.out.println("Client: " + message);	// Show message from Client
 			}
-			socket.close(); // dong ket noi 
+			socket.close(); // Close connection
 		}catch(IOException e)
                 {
                         
-			System.out.println("Da ngat ket noi voi" + socket.getInetAddress());
+			System.out.println("Closing connection with IP: " + socket.getInetAddress());
 		}
 	}
 }
