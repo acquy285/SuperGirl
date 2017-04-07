@@ -17,7 +17,7 @@ public class TestConnection {
 
         try
         {
-            sock.connect(addr,3000);//3000 ms = 3s
+            sock.connect(addr,3000);
             System.out.println("You are connected!!");
         }
         catch (Exception e)
