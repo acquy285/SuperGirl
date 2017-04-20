@@ -1,58 +1,60 @@
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
+//-----------------------------------------------------------------------------------------------
+//Các thu vi?n c?n import
+import java.io.*;
+import java.net.*;
 
-public class server{
-    public static void main(String[] args) throws IOException{
-        Socket socket;
-        BufferedReader read;
-        BufferedWriter write;
-        PrintWriter print;
-        System.out.println("San sang ket noi");
-        try{
-            
-            while(true){
-                
-                   ServerSocket s = new ServerSocket(4444);
-                   socket = s.accept();
-                   new serverThread(socket).start();
-                   //
-                   System.out.println("Da ket noi.");
-                   DataInputStream din = new DataInputStream(socket.getInputStream());
-                   DataOutputStream dout = new DataOutputStream(socket.getOutputStream());
-                   //
-                   read = new BufferedReader(new InputStreamReader(System.in));
-                   write = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-                   String tinnhan = "", tingui ="";
-                   
-                   while(!tinnhan.equals("end")){
-                       tinnhan = din.readUTF();
-                       System.out.println("Client:" +tinnhan);
-                       tingui = read.readLine();
-                       dout.writeUTF(tingui);
-                       dout.flush();
-                   }
-                   s.close();
-            }
-        }catch(IOException e){}
-    }
-    private static class serverThread extends Thread{
-        Socket socket;
-        serverThread(Socket socket){
-            this.socket = socket;
+//-----------------------------------------------------------------------------------------------
+
+public class Server
+{
+        
+	public static void main(String[] args) throws IOException
+        {
+		new Server().Run(); 
+	}
+      
+       
+	public void Run() throws IOException
+        {
+            int Num = 0;
+		ServerSocket s = new ServerSocket(4444);
+		System.out.println("San sang de ket noi!");
+                Socket socket = null;
+		while(true){
+                    
+			socket = s.accept();
+                        System.out.println("Da ket noi");
+                        //Num++;
+                        //System.out.println("Dang co " +Num +" client ket noi");
+       
+			new ServerThread(socket).start(); 
+                        
+		    }
         }
+        
+        // Thread cho Server
+        public class ServerThread extends Thread {
+	Socket socket;
+	ServerThread(Socket socket){
+		this.socket = socket;
+	}
         @Override
-        public void run(){
-            System.out.println("Ung lam");
-        }
-    }
-    
+	public void run(){
+		try{
+			String message = null;
+                        BufferedWriter write = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+			BufferedReader read = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			while((message = read.readLine()) != null ){
+                            //if(message.equals("get")){
+                                
+                            //}
+				System.out.println("Client: " + message);	
+			}
+			socket.close(); // dong ket noi 
+		}catch(IOException e){
+			System.out.println("Khong co ket noi");
+		}
+	}
+}
 }
