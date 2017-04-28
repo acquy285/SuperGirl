@@ -10,7 +10,7 @@ public class ChatServer implements Runnable
    {  try
       {  System.out.println("Binding to port " + port + ", please wait  ...");
          server = new ServerSocket(port);  
-         System.out.println("Server started: " + server);
+         System.out.println("Ket noi Server: " + server);
          start();
       }
       catch(IOException ioe)
@@ -34,7 +34,7 @@ public class ChatServer implements Runnable
          client.start();
       }
       catch(IOException ioe)
-      {  System.out.println("Error opening thread: " + ioe); }
+      {  System.out.println("Mo Thread loi: " + ioe); }
    }
    public void start()                   { /* no change */ }
    public void stop()                    { /* no change */ }
