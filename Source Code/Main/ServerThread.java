@@ -25,7 +25,7 @@ public class ServerThread extends Thread
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream())); // Create input stream
 			while((message = bufferedReader.readLine()) != null )
                         {
-				System.out.println("Client: " + message);	// Show message from Client
+				System.out.println("Client 1:" + message);	// Show message from Client
 			}
 			socket.close(); // Close connection
 		}catch(IOException e)
